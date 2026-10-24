@@ -32,5 +32,26 @@
         FROM tbl_user
         WHERE user_id = ? AND user_pw = ?
     </entry>
+    
+    <entry key="selectReviewsByCategory">
+        select *
+        from tbl_review v
+        join tbl_restaurant r on v.restaurant_id = r.restaurant_id
+        join tbl_user u on v.tbl_user_id = u.id
+        where r.category = ?
+    </entry>
+
+    <entry key="selectFindReviewsUserId">
+        select *
+        from tbl_review v
+        join tbl_restaurant r on v.restaurant_id = r.restaurant_id
+        join tbl_user u on v.tbl_user_id = u.id
+        where v.tbl_user_id = ?
+    </entry>
+
+    <entry key="deleteReviewUserId">
+        delete from tbl_review where tbl_user_id = ? and restaurant_id =
+        (select restaurant_id from tbl_restaurant where restaurant_name = ?)
+    </entry>
 
 </properties>

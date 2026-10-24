@@ -150,15 +150,13 @@ public class Application {
     /// 로그인 -> 리뷰 삭제 시 호출되는 함수
     /// @param scanner: 콘솔 입력에 사용하는 Scanner입니다.
     private static void deleteReview(Scanner scanner) {
-        ConsoleView.displayMessage("리뷰 삭제");
-        // TODO: UserSession 사용자 본인의 리뷰 목록을 조회해 출력합니다.
-        ConsoleView.displayMessage(
-                "본인이 작성한 리뷰 목록을 표시할 예정입니다. (연동 전)");
-        int reviewNumber = readNumber(scanner, "삭제할 리뷰의 목록 번호: ");
+        ConsoleView.displayMessage("리뷰 목록을 보여드리겠습니다");
+        int userId = UserSession.getUserInfo().getId();
 
-        // TODO: 목록 번호에 해당하는 본인의 리뷰를 삭제합니다.
-        ConsoleView.displayMessage(
-                reviewNumber + "번 리뷰 삭제 입력을 받았습니다. (처리 예정)");
+        reviewController.findReviewsUserId(userId);
+        String restaurantName = readText(scanner, "삭제하고 싶은 식당명 : ");
+
+        reviewController.deleteReview(userId, restaurantName);
     }
 
     /// 로그인 -> 리뷰 수정 시 호출되는 함수

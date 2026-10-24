@@ -37,5 +37,33 @@ public class ReviewController {
 
     public void findReviewsByCategory(Category category) {
         List<ReviewDto> results = repository.findReviewsByCategory(category);
+
+        if (!results.isEmpty()) {
+            ConsoleView.displayReviewList(repository.findReviewsByCategory(category));
+        } else {
+            ConsoleView.displayPrompt("현재 " + category.getCategory() + " 카테고리에 등록된 리뷰가 없어서 출력이 불가능합니다.");
+        }
+    }
+
+    public void deleteReview(int userId, String restaurantName){
+
+        int result = repository.deleteReview(userId, restaurantName);
+
+        if(result !=0){
+            ConsoleView.displayMessage("리뷰가 삭제되었습니다");
+        }else{
+            ConsoleView.displayMessage("삭제할 리뷰가 없습니다");
+        }
+    }
+
+    public void findReviewsUserId(int userId){
+
+        List<ReviewDto> results = repository.findReviewsUserId(userId);
+        if(!results.isEmpty()) {
+            ConsoleView.displayReviewList(results);
+            ConsoleView.displayMessage("삭제하고 싶은 리뷰를 선택해주세요");
+        }else{
+            ConsoleView.displayMessage("리뷰를 등록한 유저가 아닙니다");
+        }
     }
 }

@@ -25,7 +25,12 @@ public interface ReviewRepository {
     List<ReviewDto> findReviews();
 
     /// 리뷰 삭제
-    /// @param reviewId 삭제하고자 하는 리뷰의 아이디
+    /// @param restaurantName 삭제하고자 하는 레스토랑의 식당명
+    /// @param userId 등록한 사용자가 맞는지 확인하는 유저의 아이디
     /// @return 영향 받은 행의 수
-    int deleteReview(int reviewId);
+    int deleteReview(int userId, String restaurantName);
+
+    /// 본인이 등록한 리뷰목록 조회
+    /// @param userId 등록한 사용자가 맞는지 확인하는 유저의 아이디
+    List<ReviewDto> findReviewsUserId(int userId);
 }

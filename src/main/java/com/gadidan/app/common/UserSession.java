@@ -19,6 +19,8 @@ public class UserSession {
         userSession = user;
     }
 
+    public static UserDto getUserInfo() {return userSession;}
+
     public static void removeUserInfo() {
         userSession = null;
     }
