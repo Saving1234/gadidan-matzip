@@ -1,6 +1,7 @@
 package com.gadidan.app.run;
 
 import com.gadidan.app.common.Category;
+import com.gadidan.app.common.DatabaseConnectionException;
 import com.gadidan.app.common.UserSession;
 import com.gadidan.app.controller.ReviewController;
 import com.gadidan.app.controller.UserController;
@@ -26,13 +27,18 @@ public class Application {
                 ConsoleView.displayMainMenu();
                 int choice = readNumber(scanner, "선택: ");
 
-                switch (choice) {
-                    case 1 -> signUp(scanner);
-                    case 2 -> login(scanner);
-                    case 3 -> browseReviews(scanner);
-                    case 0 -> running = false;
-                    default -> ConsoleView.displayMessage(
-                            "메뉴에 있는 번호를 입력해 주세요.");
+                try {
+                    switch (choice) {
+                        case 1 -> signUp(scanner);
+                        case 2 -> login(scanner);
+                        case 3 -> browseReviews(scanner);
+                        case 0 -> running = false;
+                        default -> ConsoleView.displayMessage(
+                                "메뉴에 있는 번호를 입력해 주세요.");
+                    }
+                } catch (DatabaseConnectionException e) {
+                    ConsoleView.displayMessage(
+                            "데이터베이스 연결에 실패했습니다. 잠시 후 다시 시도해 주세요.");
                 }
             }
         } catch (NoSuchElementException e) {

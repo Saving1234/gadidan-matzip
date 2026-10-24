@@ -13,8 +13,6 @@ public class JDBCTemplate {
 
     public static Connection getConnection() {
 
-        Connection con = null;
-
         Properties prop = new Properties();
 
         try {
@@ -25,35 +23,28 @@ public class JDBCTemplate {
 
             Class.forName(driver);
 
-            con = DriverManager.getConnection(url, prop);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return DriverManager.getConnection(url, prop);
+        } catch (IOException | ClassNotFoundException | SQLException e) {
+            throw new DatabaseConnectionException(
+                    "데이터베이스 연결에 실패했습니다.", e);
         }
-
-        return con;
     }
 
     public static void close(Connection con) {
 
         try {
-            if(con != null & !con.isClosed()) {
+            if (con != null && !con.isClosed()) {
                 con.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void close(Statement stmt) {
 
         try {
-            if(stmt != null && !stmt.isClosed()) {
+            if (stmt != null && !stmt.isClosed()) {
                 stmt.close();
             }
         } catch (SQLException e) {
@@ -65,7 +56,7 @@ public class JDBCTemplate {
     public static void close(ResultSet rset) {
 
         try {
-            if(rset != null && !rset.isClosed()) {
+            if (rset != null && !rset.isClosed()) {
                 rset.close();
             }
         } catch (SQLException e) {

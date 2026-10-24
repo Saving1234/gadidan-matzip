@@ -114,6 +114,14 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         return reviewDtoList;

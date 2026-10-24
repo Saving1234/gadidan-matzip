@@ -6,6 +6,7 @@ import com.gadidan.app.repository.ReviewRepository;
 import com.gadidan.app.repository.impl.ReviewRepositoryImpl;
 import com.gadidan.app.view.ConsoleView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ReviewController {

@@ -5,8 +5,10 @@ public enum Category {
     KOREAN("한식"),
     CHINESE("중식"),
     JAPANESE("일식"),
+    WESTERN("양식"),
     SNACK_FOOD("분식"),
-    BUFFET("뷔페");
+    BUFFET("뷔페"),
+    DESSERT("디저트");
 
     Category(String category) {
         this.category = category;
